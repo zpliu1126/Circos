@@ -16,9 +16,13 @@
 		</ul>
 		<p>
 			<h3>它主要的格式例如</h3>
-			<pre class="text-danger">
-				chr - ID LABEL START END COLOR
-			</pre>
+<pre id="format" style="display: none;">
+
+	chr - ID LABEL START END COLOR	
+</pre>
+			<script>
+				sourceCodeById("format");
+			</script>
 			<p>
 				前面两个字段chr和-总是固定的，
 				<br>
@@ -32,15 +36,17 @@
 
 		<hr>
 		<h3>除了chromosomes的数据类型还存在着band类型</h3>
-			<pre>
-			band hs1 p36.33 p36.33 0 2300000 gneg
-			band hs1 p36.32 p36.32 2300000 5300000 gpos25
-			band hs1 p36.31 p36.31 5300000 7100000 gneg
-			...
-			band hs2 p25.3 p25.3 0 4300000 gneg
-			band hs2 p25.2 p25.2 4300000 7000000 gpos50
-			band hs2 p25.1 p25.1 7000000 12800000 gneg
-		</pre>
+<pre id="bandformat" style="display: none;">
+
+ 	band hs1 p36.33 p36.33 0 2300000 gneg
+ 	band hs1 p36.32 p36.32 2300000 5300000 gpos25
+ 	band hs1 p36.31 p36.31 5300000 7100000 gneg
+ 	...
+ 	band hs2 p25.3 p25.3 0 4300000 gneg
+ 	band hs2 p25.2 p25.2 4300000 7000000 gpos50
+ 	band hs2 p25.1 p25.1 7000000 12800000 gneg
+</pre>
+		<script> sourceCodeById("bandformat");</script>
 		<p>
 			与chromosomes的数据定义类似，只不过前两列是band和对应的父染色体的id名
 
@@ -52,29 +58,31 @@
 		</p>
 		<h1>直接看一下band的具体效果是什么样子吧！</h1>
 		<img src="./image/band.svg" alt="" width="80%">
-		<pre >
-			&ltideogram&gt
-			&ltspacing&gt
-			default=0.05r
-			&lt/spacing&gt
-			radius=0.9r
-			thickness=30p
-			fill=yes
-			stroke_color=dgrey
-			stroke_thickness=2p
-			show_label=yes
-			label_font=default
-			label_radius=1.1r
-			label_size=30
-			label_parallel=yes
+<pre  id="band" style="display: none;">
 
-			show_bands=yes
-			fill_bands=yes
-			band_stroke_thickness=2p
-			band_stroke_color=white
-			band_transparency=4
-			&lt/ideogram&gt
-		</pre>	
+	&lt ideogram&gt
+	&lt spacing&gt
+	default=0.05r
+	&lt/spacing&gt
+	radius=0.9r
+	thickness=30p
+	fill=yes
+	stroke_color=dgrey
+	stroke_thickness=2p
+	show_label=yes
+	label_font=default
+	label_radius=1.1r
+	label_size=30
+	label_parallel=yes
+
+	show_bands=yes
+	fill_bands=yes
+	band_stroke_thickness=2p
+	band_stroke_color=white
+	band_transparency=4
+	&lt/ideogram&gt
+</pre>	
+		<script>sourceCodeById("band");</script>
 		<h1>关于染色体的过滤选项filtering</h1>
 		<p>
 			主要使用到chromosomes和chromosomes_display_default两个参数
@@ -84,15 +92,19 @@
 			当为no的时候，就可以结合chromosomes参数自定义选择要展示染色体
 		</p>
 		下面是几种常见的过滤方式
-		<pre>
+<pre id="filter" style="display: none;">
 		chromosomes_display_default=no
 		chromosomes=/hs[1-4]$/
-		</pre>
+</pre>
+<script>sourceCodeById("filter")</script>
+
 		使用-号排除不需要展示的ideogram
-		<pre>
+<pre id="filter2" style="display: none;">
+
 			chromosomes=-hs1;-hs2;-hs3;
 			chromosomes_display_default=yes
-		</pre>
+</pre>
+<script>sourceCodeById("filter2")</script>
 		<h1>修改ideogram的出现顺序</h1>
 		<ul>
 			<li>直接指定绝对的顺序，也就是把所有的ideogram都排好序，写上</li>
@@ -100,42 +112,82 @@
 		</ul>
 		绝对顺序的就不做延伸了，来了解一下相对顺序吧
 
-		<pre>
-chromosomes = hs1;hs2;hs3;hs4;hs5;hs6;hs7;hs8
-chromosomes_order = hs5,hs4	
-这种将会展示的顺序为1、2、3、6、5、4、7、8
-		</pre>
-		
+<pre id="order1" style="display: none;">
+
+		chromosomes = hs1;hs2;hs3;hs4;hs5;hs6;hs7;hs8
+		chromosomes_order = hs5,hs4	
+		这种将会展示的顺序为1、2、3、6、5、4、7、8
+</pre>
+		<script>sourceCodeById("order1")</script>
 		<br>
 		这是因为hs5作为锚固定在整个字符的第5位，而要让hs4在其后则需要交换hs4和hs6的位置
 
-		<pre>
-chromosomes_order = hs3,-,hs2
-这种将会展示的顺序为4、5、3、1、2、6、7、8
-		</pre>
+<pre id="order2" style="display: none;">
+
+	chromosomes_order = hs3,-,hs2
+	这种将会展示的顺序为4、5、3、1、2、6、7、8
+</pre>
+		<script>sourceCodeById("order2");</script>
 		同样hs3固定在第3号位置 
 		<br>这个的实现原理则是先把3和2确定后在填充-符，并且一次从hs3前填充两个字符，剩下的都填写到hs2后面
 		
 		另一种类似于正则表达式
-		<pre>
-chromosomes_order = ^,hs5
-显示的顺序为5,1,2,3,4,6，7,8
-chromosomes_order = hs5,$
-显示顺序为1,2,3,4,6，7,8，5
+<pre id="order3" style="display: none;">
 
-		</pre>
-
+	chromosomes_order = ^,hs5
+	显示的顺序为5,1,2,3,4,6，7,8
+	chromosomes_order = hs5,$
+	显示顺序为1,2,3,4,6，7,8，5
+</pre>
+<script>sourceCodeById("order3");</script>
 
 		<h1>具体的的顺序实现效果</h1>
 		<img src="./image/order.svg" alt="" width="80%">
-		<pre>
-chromosomes_radius=/hs[1-7]$/:0.9r,hs8:0.8r
-chromosomes_scale=hs1=0.3r,/hs[2-8]$/=0.7rn
+<pre id="order" style="display: none;">
 
-chromosomes_order=hs3,-,hs5
-果然顺序是顺时针的2、4、3、1、5、6、7、8
-		</pre>
+	chromosomes_radius=/hs[1-7]$/:0.9r,hs8:0.8r
+	chromosomes_scale=hs1=0.3r,/hs[2-8]$/=0.7rn
+	chromosomes_order=hs3,-,hs5
+	果然顺序是顺时针的2、4、3、1、5、6、7、8
+</pre>
+		<script>
+			sourceCodeById("order");
+		</script>
 
+	<h1>对ideogram进行修剪</h1>
+	<p>
+		主要使用chromosomes=hs1:0-100
+		<br>
+		和chromosomes_breaks=-hs1:25-75;hs2:25-75;
+		<br>
+		接下来主要就是关于break这条线的修饰
+		它会放在ideogram的spacing标签内，做为一类分割线
+	</p>
+	
+	<h2>效果图：</h2>
+	<img src="./image/cropping.svg" width="80%" alt="">
+	<pre id="cropping" style="display: none;" >
+
+	用于修剪 ideogram
+	chromosomes=hs1:0-100;hs2:0-100;hs3:0-100;hs4:0-100;hs5;hs6;hs7;hs8
+
+	chromosomes_breaks=-hs1:25-75;-hs2:10-50;
+	&lt spacing&gtdefault=0.005r
+	break=0.5r
+	axis_break_at_edge=yes
+	axis_break=yes
+	axis_break_style=2
+
+	&lt break_style 2&gtstroke_color=red
+	stroke_thickness=5p
+	thickness=2r
+	&lt/break&gt
+	&lt/spacing&gt
+</pre>
+
+	<script>
+		sourceCodeById("cropping")
+	</script>
 
 	</article>
 	
