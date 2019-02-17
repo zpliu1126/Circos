@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="/includes/head.js"></script>
+<title>Ideogram学习</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Circos中ideogram中的意义</h1>
+	<article>
+		<h2>karyotype有着不同的意义</h2>
+		<ul>
+			<li>它是circos图片中的轴</li>
+			<li>在生物学的内容上可以是染色体chromosomes、 拼装的contig序列或者是clone片</li>
+			<li>在karyotype的数据文件中，定义了每个轴，它们有不同的id、不同的名字label;有着大小([0-100000])和颜色属性</li>
+		</ul>
+		<p>
+			<h3>它主要的格式例如</h3>
+			<pre class="text-danger">
+				chr - ID LABEL START END COLOR
+			</pre>
+			<p>
+				前面两个字段chr和-总是固定的，
+				<br>
+				id字段是用来表明这个chr的身份的
+				<br>
+				label字段则是用来在图片上进行表示的文字信息
+				<br>
+				start和end在keryotype中尽量覆盖全长，而在其他的conf文件中来控制它的画出来的长度
+			</p>
+
+
+		<hr>
+		<h3>除了chromosomes的数据类型还存在着band类型</h3>
+			<pre>
+			band hs1 p36.33 p36.33 0 2300000 gneg
+			band hs1 p36.32 p36.32 2300000 5300000 gpos25
+			band hs1 p36.31 p36.31 5300000 7100000 gneg
+			...
+			band hs2 p25.3 p25.3 0 4300000 gneg
+			band hs2 p25.2 p25.2 4300000 7000000 gpos50
+			band hs2 p25.1 p25.1 7000000 12800000 gneg
+		</pre>
+		<p>
+			与chromosomes的数据定义类似，只不过前两列是band和对应的父染色体的id名
+
+			<br>
+			接着就是band的id编号与label名称，以及坐标和颜色信息
+		</p>
+
+
+			当然Circos官网还给出了许多可以参考的图片，用到你的数据中
+			<a href="http://circos.ca/images/scientific_literature/"> published examples from the literature</a>
+		</p>
+		<h1>直接看一下band的具体效果是什么样子吧！</h1>
+		<img src="./image/band.svg" alt="" width="80%">
+		<pre >
+			&ltideogram&gt
+			&ltspacing&gt
+			default=0.05r
+			&lt/spacing&gt
+			radius=0.9r
+			thickness=30p
+			fill=yes
+			stroke_color=dgrey
+			stroke_thickness=2p
+			show_label=yes
+			label_font=default
+			label_radius=1.1r
+			label_size=30
+			label_parallel=yes
+
+			show_bands=yes
+			fill_bands=yes
+			band_stroke_thickness=2p
+			band_stroke_color=white
+			band_transparency=4
+			&lt/ideogram&gt
+		</pre>
+
+		
+	</article>
+		
+	</div>
+	
+</body>
+</html>
+
