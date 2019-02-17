@@ -7,7 +7,7 @@
 <body>
 	<div class="container">
 		<h1>Circos中ideogram中的意义</h1>
-	<article>
+		<article>
 		<h2>karyotype有着不同的意义</h2>
 		<ul>
 			<li>它是circos图片中的轴</li>
@@ -47,8 +47,6 @@
 			<br>
 			接着就是band的id编号与label名称，以及坐标和颜色信息
 		</p>
-
-
 			当然Circos官网还给出了许多可以参考的图片，用到你的数据中
 			<a href="http://circos.ca/images/scientific_literature/"> published examples from the literature</a>
 		</p>
@@ -76,11 +74,75 @@
 			band_stroke_color=white
 			band_transparency=4
 			&lt/ideogram&gt
+		</pre>	
+		<h1>关于染色体的过滤选项filtering</h1>
+		<p>
+			主要使用到chromosomes和chromosomes_display_default两个参数
+
+			当chromosomes_display_default=yes的时候，默认是展示karyotype中的所有染色体
+			<br>
+			当为no的时候，就可以结合chromosomes参数自定义选择要展示染色体
+		</p>
+		下面是几种常见的过滤方式
+		<pre>
+		chromosomes_display_default=no
+		chromosomes=/hs[1-4]$/
+		</pre>
+		使用-号排除不需要展示的ideogram
+		<pre>
+			chromosomes=-hs1;-hs2;-hs3;
+			chromosomes_display_default=yes
+		</pre>
+		<h1>修改ideogram的出现顺序</h1>
+		<ul>
+			<li>直接指定绝对的顺序，也就是把所有的ideogram都排好序，写上</li>
+			<li>相对顺序，只指定单个锚，然后调整其他ideogram的顺序</li>
+		</ul>
+		绝对顺序的就不做延伸了，来了解一下相对顺序吧
+
+		<pre>
+chromosomes = hs1;hs2;hs3;hs4;hs5;hs6;hs7;hs8
+chromosomes_order = hs5,hs4	
+这种将会展示的顺序为1、2、3、6、5、4、7、8
+		</pre>
+		
+		<br>
+		这是因为hs5作为锚固定在整个字符的第5位，而要让hs4在其后则需要交换hs4和hs6的位置
+
+		<pre>
+chromosomes_order = hs3,-,hs2
+这种将会展示的顺序为4、5、3、1、2、6、7、8
+		</pre>
+		同样hs3固定在第3号位置 
+		<br>这个的实现原理则是先把3和2确定后在填充-符，并且一次从hs3前填充两个字符，剩下的都填写到hs2后面
+		
+		另一种类似于正则表达式
+		<pre>
+chromosomes_order = ^,hs5
+显示的顺序为5,1,2,3,4,6，7,8
+chromosomes_order = hs5,$
+显示顺序为1,2,3,4,6，7,8，5
+
 		</pre>
 
-		
+
+		<h1>具体的的顺序实现效果</h1>
+		<img src="./image/order.svg" alt="" width="80%">
+		<pre>
+chromosomes_radius=/hs[1-7]$/:0.9r,hs8:0.8r
+chromosomes_scale=hs1=0.3r,/hs[2-8]$/=0.7rn
+
+chromosomes_order=hs3,-,hs5
+果然顺序是顺时针的2、4、3、1、5、6、7、8
+		</pre>
+
+
 	</article>
-		
+	
+
+
+
+
 	</div>
 	
 </body>
