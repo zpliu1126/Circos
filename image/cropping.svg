@@ -275,14 +275,14 @@
 <line x1='1425.6' y1='422.6' x2='1424.9' y2='412.6' style="stroke-width:2.0;stroke:rgb(0,0,0);stroke-linecap:round;fill:none;" />
 <line x1='1458.8' y1='420.8' x2='1458.4' y2='410.8' style="stroke-width:2.0;stroke:rgb(0,0,0);stroke-linecap:round;fill:none;" />
 <path d="M657.848,872.879 A1050.000,1050.000 40.000 0,1 1468.738,450.466 L1467.844,420.479 A1080.000,1080.000 0.000 0,0 633.787,854.961 Z" style="stroke-width:2.0;stroke:rgb(115,115,115);stroke-linecap:round;fill:none;" />
-<path d="M 1679.34,343.83 L 1688.53,284.54 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
-<path d="M 1696.53,346.62 L 1706.61,287.48 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
-<path d="M 1871.00,390.38 L 1890.02,333.47 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
-<path d="M 1986.55,435.97 L 2011.50,381.40 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
-<path d="M 2002.34,443.33 L 2028.10,389.14 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
-<path d="M 2298.84,645.16 L 2339.81,601.32 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
-<path d="M 2655.24,1314.71 L 2714.48,1305.21 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
-<path d="M 2526.11,2062.14 L 2578.73,2090.97 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 1677.04,358.65 L 1690.83,269.71 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 1694.01,361.41 L 1709.13,272.69 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 1866.24,404.60 L 1894.78,319.25 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 1980.31,449.61 L 2017.74,367.76 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 1995.90,456.88 L 2034.54,375.59 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 2288.60,656.12 L 2350.05,590.36 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 2640.42,1317.09 L 2729.29,1302.84 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
+<path d="M 2512.95,2054.93 L 2591.88,2098.17 " style="stroke-width:5.0;stroke:rgb(251,106,74);stroke-linecap:round;fill:none;" />
 </g>
 <defs>
 <pattern id="hline-sparse" width="10" height="10" patternTransform="rotate(0 0 0)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="10" y2="0" style="stroke:black;stroke-width:2" /></pattern>
