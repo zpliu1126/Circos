@@ -55,10 +55,104 @@ stroke_thickness=2
 <script>sourceCodeById("highlight_code")</script>
 <p>
 	从代码上也可以看到，出现了绿、红、蓝三种强调的颜色
-	<br>当他们在相同的位置显示时，通过z参数可以设置，先画哪一个
-	当然Z约大，也就后画，所以就覆盖了之前的颜色
+	<br>当他们在相同的位置显示时，通过z参数可以设置，
+	当Z越大，它的位置越高看起来也就在上面
 </p>
-	</article>
+<pre id="highlight_Z" style="display: none;">
+hs1 12870075 25724192 fill_color=green,z=37,r0=0.4r-126.289p,r1=0.4r+126.289p
+hs1 10044837 11066617 fill_color=blue,z=95,r0=0.4r-100.0388p,r1=0.4r+100.0388p
+</pre>
+<script >sourceCodeById("highlight_Z")</script>
+
+<h1>在ideogram中展示highlight，同时理解了grid是什么东西</h1>
+<img src="./image/recipe.svg" width="70%" alt="">
+
+<p>
+	图中主要展示的是两类基因，分别以不同的颜色加以区分，蓝色和橙色
+
+</p>
+<pre id="recipe_highlight" style="display: none">
+&lt highlights&gt
+##设置所有的highlight的高度
+z=5
+###将高亮显示在ideogram上
+ideogram=yes
+fill_color=blue
+&lt highlight&gt
+###重新定义#
+file=data/other_genes.txt
+z=10
+&lt /highlight&gt
+&lt highlight&gt
+file=data/omim_genes.txt
+z=10
+fill_color=orange
+&lt /highlight&gt
+&lt /highlights&gt
+</pre>
+<script>sourceCodeById("recipe_highlight")</script>
+<p>
+	通过在higlights标签中使用ideogram参数来使得高亮在ideogram中显示
+</p>
+
+<h1>终于搞懂了grid这个东西是什么了</h1>
+<p>
+	从上面图中也可以看到在每个10的倍数的刻度线上都有一条线对应着,主要靠着三个参数
+	<br>
+	<ul>
+		<li>show_grid</li>
+		<li>grid_start=0.5r</li>
+		<li>grid_end=dims(ideogram,radius_outer>)</li>
+	</ul>
+</p>
+<pre id="grid" style="display: none;">
+show_grid=yes
+###网格的展示########
+grid_start=0.5r
+grid_end=dims(ideogram,radius_inner)
+
+##########对应刻度显示grid##########
+&lt tick&gt
+spacing=10u
+size=15p
+thickness=3p
+show_label=yes
+label_size=20p
+label_offset=10p
+format=%d
+grid=yes
+grid_color=vgrey
+grid_thickness=2p
+&lt /tick&gt
+</pre>
+<script>sourceCodeById("grid")</script>
+
+<h1>第二种起强调作用的模式</h1>
+<img src="./image/recipe2.svg" width="70%" alt="">
+<pre id="recipe2_highlight" style="display: none;">
+&lt highlight&gt
+file=data/highlights.txt
+r0 = 0.5r
+r1 = 1r
+fill_color = lgrey
+&lt /highlight&gt
+&lt highlight&gt
+file=data/highlights.txt
+r0 = 1r
+r1 = 1.1r
+fill_color = lyellow
+&lt /highlight&gt
+&lt highlight&gt
+file=data/highlights.txt
+r0 = 1.1r
+r1 = 1.15r
+fill_color = lgrey
+&lt /highlight&gt	
+</pre>
+<script>sourceCodeById("recipe2_highlight")</script>
+<p>从源代码上也可以看出来，就是对一个区域，在不同的位置填充不同的颜色，起到的强调效果还不错</p>
+
+</article>
 
 
 
