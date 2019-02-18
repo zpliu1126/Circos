@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="/includes/head.js"></script>
+	<title>highlight展示</title>	
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center text-success">之前学完了ideogram的整体布局 <br>现在学习如何进行某个区域的强调展示</h1>
+		<article>
+			<p>首先就需要我们有一个指明需要强调的数据文件;表明了在ideogram中需要highlight的区域</p>
+			<pre id="highlight_data" style="display: none;">
+...
+hs1 1298972 1300443
+hs1 1311738 1324571
+hs1 1397026 1421444
+hs1 1437417 1459927
+...
+	</pre>
+	<script>sourceCodeById("highlight_data")</script>
+			<img src="./image/highlight.svg" alt="" width="70%">
+
+	<h2>起到作用的代码部分如下</h2>
+	<pre id="highlight_code" style="display: none;">
+##定义高亮###	
+&lt highlights&gt
+###优先画，也就是画在底层
+z=0
+fill_color*=green
+&lt highlight&gt
+###强调的数据文件
+file=data/highlight.txt
+r0=0.6r
+r1=1.0r-100p
+&lt /highlight&gt
+&lt highlight&gt
+file=data/highlight.txt
+#####被强调区域的位置，和长度设置##
+r0=0.7r
+r1=0.7r+100p
+z=5
+fill_color*=red
+&lt /highlight&gt
+&lt highlight&gt
+file=data/highlight.txt
+r0=1.1r
+r1=1.15r
+
+fill_color*=blue
+stroke_color=dblue
+stroke_thickness=2
+&lt /highlight&gt
+&lt /highlights&gt
+</pre>
+<script>sourceCodeById("highlight_code")</script>
+<p>
+	从代码上也可以看到，出现了绿、红、蓝三种强调的颜色
+	<br>当他们在相同的位置显示时，通过z参数可以设置，先画哪一个
+	当然Z约大，也就后画，所以就覆盖了之前的颜色
+</p>
+	</article>
+
+
+
+
+
+
+
+
+
+<!-- 	##################### -->
+	<footer id="footer">
+			
+		</footer>
+	<script>
+		$("#footer").load("/includes/footer.html.php");
+	</script>	
+	</div>
+</body>
+</html>
