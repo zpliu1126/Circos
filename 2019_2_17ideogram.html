@@ -8,7 +8,7 @@
 	<div class="container">
 		<h1>Circos中ideogram中的意义</h1>
 		<article>
-		<h2>karyotype有着不同的意义</h2>
+		<h2>ideogram有着不同的意义；chromosomes是karyotype文件中的染色体；而ideogram则是展示染色体的一部分区域，或者完整的一条染色体</h2>
 		<ul>
 			<li>它是circos图片中的轴</li>
 			<li>在生物学的内容上可以是染色体chromosomes、 拼装的contig序列或者是clone片</li>
@@ -215,7 +215,42 @@
 	这里的计算方法主要是在ideogram中设置radius参数，为整个图片的0.9 
 	<br>
 	紧接着在chromosomes_radius参数中可以分别设置每个染色体的半径，
-	<br>也就是hs1： radius*chromosomes_radius =0.9r*0.4r 也就是hs1的半径为正规图片半径的0.36r！
+	<br>也就是hs1： radius*chromosomes_radius =0.9r*0.4r 也就是hs1的半径为正常图片半径的0.36！
+</p>
+
+<h1>理解tag标签的含义，当整条chromosomes被break成多个ideogram时，这些ideogram就可以通过tag来进行区分
+<br>如果想要在被分开的ideogram上加上label只需要使用 label_with_tag=yes即可</h1>
+<img src="./image/tag.svg" alt="" width="80%">
+<pre id="show_label_tag" style="display: none;">
+#定义好分割后的tag名字
+chromosomes=hs1[a]:1-50;hs1[b]:70-100;hs2[c]:40-70;hs2[d]:80-120;hs3;hs4;
+#在ideogram标签中使用标签进行显示
+show_label_tag=yes
+
+###同样可以使用正则表达式，对label的输出格式进行调整
+label_format=eval(var(chr)=~/hs3$/ ? sprintf("chr%s",var(label)) : var(label))
+	
+</pre>
+<script>sourceCodeById("show_label_tag")</script>
+<p>
+	这里使用到C语言中的if判断语句A?B:C ;
+</p>
+
+<h1>最后就是关于ideogram的orientation的问题里，主要有两个参数</h1>
+<div>
+	<img src="./image/clockwise.png"  width="40%" alt="">
+	<img src="./image/counterclockwise.png"  width="40%" alt="">
+</div>
+
+<ul>
+	<li>angle_offset设置图片的旋转角度，默认为-90从12钟方向开始</li>
+	<li>angle_orientation设置图片展示方式，逆时针或者顺时针，默认clockwise顺时针，counterclockwise</li>
+	<li>这两个参数都是在image标签中设置，并且需要强制设置*</li>
+</ul>
+
+<p style="font-size: 30;color: #8F2828;">
+	emmm 
+	<strong>ideogram</strong>这部分就学习到这里啦！这些主要都是参考 <a href="http://circos.ca/documentation/tutorials/ideograms">官网手册</a>，加上自己动手实践总结的，有些地方还不是很完善，有错误的地方还请指正！
 </p>
 <!-- #########################################
  -->
