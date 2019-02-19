@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="/includes/head.js"></script>
+	<title>Ticks基本概念</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center text-success">Ticks的主要概念</h1>
+		<div align="center"><img src="./image/ticks_basic.svg" alt="" width="80%" ></div>
+		
+		<article>
+			<p>
+				<h3>从图片当中可以看到，三条染色体上出现了ticks <br>它们出现的位置也并不是从开始到结尾的</h3>
+<pre id="ticks_basic" style="display: none;">
+show_ticks=yes
+show_tick_labels=yes
+&lt ticks&gt
+chromosomes_display_default=no
+radius=dims(ideogram,radius_outer)
+label_font=default
+label_offset=5p
+orientation=out
+multiplier=1e-6
+color=black
+&lt /ticks&gt		
+</pre>
+<script>sourceCodeById("ticks_basic")</script>
+<ul  class="text-justify" style="font-size: 25px;">
+	<li>首先使用show_ticks和show_tic_labels参数控制tick的有无</li>
+	<li>在tick的父标签ticks中定义了全局变量；并且可以在子标签中被继承和修改</li>
+	<li>chromosomes_display_default=no参数可以对每条染色体是否显示tick；以及显示的范围进行人为的设定</li>
+</ul>
+</p>
+<h3>接下来让我们看看子标签tick中的内容是怎么样的</h3>	
+<pre id="content_tick" style="display: none;">
+&lt tick&gt
+chromosomes=hs1:50-100;hs2;hs3:20-80;
+orientation=in
+spacing=1u
+size=8p
+thickness=2p
+color=green
+show_label=no
+&lt /tick&gt
+
+&lt tick&gt
+chromosomes=hs1:50-100;hs2;hs3:20-80;
+spacing=5u
+size=10p
+thickness=3p
+color=dred
+show_label=yes
+label_size=20p
+label_offset=10p
+format=%d
+&lt /tick&gt
+
+</pre>
+<script>sourceCodeById("content_tick")</script>	
+<p class="text-warning" style="font-size: 20px">
+	上面的内容上我们也可以发现，这和ideogram标签中对chromosomes的设置几乎是差不多的
+	<br>通过<strong> chromosomes_display_default</strong>和<strong>chromosomes</strong>参数控制目标的范围
+	<br>
+	<strong>orientation=in/out </strong>表示显示的方向啦，out就朝外；in朝里；反正radius是可以调整它显示的位置的
+</p>	
+<h3>使用<font color="red">offset</font> 和<font color="red">label_offset</font>参数调整ticks位置</h3>
+<div align="center" >
+	<img src="./image/ticks_offset.png" width="45%" alt="">
+
+	<img src="./image/ticks_label_offset.png"  width="45%" alt="">	
+</div>
+<div>
+	<div align="left" style="float: left;position: relative;left: 200px;font-size: 25px;color: red;">offset</div>
+	<div align="right" style="float: right;position: relative;right:200px;font-size: 25px;color: green;">label_offset</div>	
+</div>
+<div style="clear: both;"></div>
+<p style="font-size: 20px;">
+	从图片上可以很明显的看出这两个参数的作用
+</p>
+<h1>关于grid的介绍</h1>
+<div align="center"><img src="./image/ticks_grid.svg" width="70%" alt=""></div>
+<p style="font-size: 25px">
+	同样，grid的显示和ideogram上的tick是一样的
+	<ul style="font-size: 20px">
+		<li>参数<strong>show_grid=yes</strong>在ticks标签外控制grid的显示</li>
+		<li>使用<strong>grid_start grid_end</strong>控制显示的位置</li>
+		<li>在ticks父标签中的grid可以被thic继承，不过需要在tick标签中使用 <strong style="color: red">grid=yes</strong>参数</li>
+	</ul>
+</p>
+<pre id="ticks_grid" style="display: none;">
+#控制整体显示
+show_grid=yes
+&lt ticks&gt
+####grid在ticks父标签的部分###
+grid_start=0.5r
+grid_end=0.95r
+grid_color=black
+grid_thickness=2p
+&lt tick&gt
+	###对属性进行继承和重定义
+grid_color=red
+grid_start=0.1r
+grid_end=0.6r
+grid=yes
+&lt /tick&gt
+&lt /ticks&gt	
+</pre>
+<script>sourceCodeById("ticks_grid")</script>
+<h1>接下来是关于tick之间间隔是绝对距离还是相对距离啦</h1>
+<div align="center"><img src="./image/relative_ticks.svg" alt="" width="90%"></div>
+<p style="font-size: 25px">
+	从图中可以发现我把每一段染色体分成了100份的相对长度；然后定义每一个1%为单位长度，在上面打上label标签
+	<ul class="text-success" style="font-size: 20px">
+		<li>使用 <strong>rspacing spacing_type</strong>两个参数定义为相对长度类型</li>
+		<li>show和show_label进行展示</li>
+		<li>label_relative当然也很重要</li>
+		<li>rmulitiplier则是让每个单位是0.01的值乘上100</li>
+		<li>最后就是后缀suffix啦！</li>
+	</ul>
+</p>
+<pre id="relative_ticks" style="display: none;">
+####用来展示relative的tick
+&lt tick&gt
+chromosomes=hs1;hs2;hs3;
+show=yes
+show_label=yes
+rspacing=0.01
+spacing_type=relative
+rmultiplier=100
+label_size=20p
+offset=85p
+size=10p
+label_relative=yes
+color=black
+thickness=2p
+format=%d
+suffix=%
+&lt /tick&gt	
+</pre>
+<script>sourceCodeById("relative_ticks")</script>
+</article>
+
+
+
+	</div>
+	
+</body>
+</html>
