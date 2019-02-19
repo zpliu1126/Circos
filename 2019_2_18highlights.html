@@ -152,6 +152,48 @@ fill_color = lgrey
 <script>sourceCodeById("recipe2_highlight")</script>
 <p>从源代码上也可以看出来，就是对一个区域，在不同的位置填充不同的颜色，起到的强调效果还不错</p>
 
+<h1>默认情况下highlight优先级比links，data、grids小，可以通过plots标签来提高它的优先级,展示在图层最上面</h1>
+<img src="./image/recipe3.svg"  width="70%" alt="">
+<pre id="recipe3_highlight" style="display: none;">
+##最外面的一条highlight
+&lt highlights&gt
+&lt highlight&gt
+file = data/highlights.txt
+r0 = 0.9r
+r1 = 0.95r
+&lt /highlight&gt
+&lt /highlights&gt
+
+###里面的highlight
+&lt plots&gt
+&lt plot&gt
+type=highlight
+file=data/highlights.txt
+r0=0.8r
+r1=0.85r
+z=10
+&lt /plot&gt
+&lt /plots&gt
+</pre>
+<script>sourceCodeById("recipe3_highlight")</script>
+<p>
+	从上图中可以看到highlight部分的图片是在links下面；
+	<br>而plots标签中，则可以让它在显示在表层
+</p>
+
+<h1>总结：</h1>
+<p>
+	highlight的用法主要也就有一下几个地方
+<ul class="text-success" style="font-size: 20px;">
+	<li>数据格式</li>
+	<li>位置的调整使用ideogram=yes r0 r1 参数</li>
+	<li>关于Z-Dpeth的理解</li>
+	<li>以及结合其他图形元素的展示顺序</li>
+	<li>同时也对links的rules规则和grids网格有了一定的了解</li>
+</ul>
+<h4 class="text-danger">highlight的部分就学到这里啦！以上内容全部来自circos官网，加上本人的实践；英语水平有限可能存在一些不对的地方，请指正！</h4>
+</p>
+
 </article>
 
 
