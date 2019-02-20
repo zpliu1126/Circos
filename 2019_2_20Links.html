@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="/includes/head.js"></script>
+	<title>Links学习</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-success text-center">
+			Links是用来展现两个位置之间存在的联系；例如同源基因、两个国家等
+		</h1>
+	<h2>主要的数据格式：</h2>
+<pre id="links_data_format" style="display: none;">
+#第一种格式
+...
+hs1 100 200 hs2 250 300 color=blue
+hs1 400 550 hs3 500 750 color=red,thickness=5p
+hs1 600 800 hs4 150 350 color=black
+...	
+###第二种格式	
+...
+segdup00010 hs1 100 200 
+segdup00010 hs2 250 300
+segdup00011 hs1 400 550
+segdup00011 hs3 500 750
+segdup00012 hs1 600 800
+segdup00012 hs4 150 350
+...	
+</pre>
+	<script> sourceCodeById("links_data_format")</script>
+	<p class="text-primary" style="font-size: 25px"> 
+		第一种格式是官方推荐的格式，两个位置放在同一行
+		<br>
+		而第二种格式在未来的版本可能会被淘汰：第一列表示links ID号，同一个ID号对应着两行
+	</p>
+<div align="center">
+	<img src="./image/links_basic.svg" width="80%" alt="">
+</div>
+<p>
+<h2>源代码如下：</h2>
+<ul class="text-success" style="font-size: 25px">
+	<li><span class="text-danger">bezier_radius</span>是描述link的弯曲程度；当为0时，绘画出直线</li>
+	<li><span class="text-danger">record_limit  = 2000</span>最后再图形上只呈现2000条link</li>
+	<li><span class="text-danger">data_out_of_range* = trim</span>这是在links标签外设置的参数；从字面上可以理解为超出ideogram范围的数据过滤掉</li>
+</ul>
+<pre id="links_basic" style="display: none;">
+&lt links&gt
+&lt link&gt
+file=data/links.txt
+radius=0.95r
+color=black_a4
+bezier_radius=0.1r
+thickness=2
+record_limit  = 2000
+&lt /link&gt
+&lt /links&gt
+data_out_of_range*=trim
+</pre>
+<script>sourceCodeById("links_basic")</script>
+
+</p>
+<h2>关于links的geometry几何问题</h2>
+<div align="center"><img src="./image/links_geometry.png" alt=""></div>
+<p class="text-primary" style="font-size: 25px">
+感觉这个要到具体美化的时候才会用到；先这样记着吧到时候再深入了解............
+<br>
+	主要受到以下几个参数的控制
+	<ul class="text-success" style="font-size: 20px">
+		<li><span class="text-danger">bezier_radius</span>控制曲率也就是p2点的位置</li>
+		<li><span class="text-danger">radius</span>控制连接处的位置也就是p0和p1位置</li>
+		<li><span class="text-danger">crest</span>则控制p3和p4点的位置；当crest为1时，p3和p4位于p2处；当crest=0时，p3和p4位于p1和p0处</li>
+	</ul>
+
+</p>
+<h2>当有多中links重叠时，使用z参数控制优先顺序是个不错的选择</h2>
+<div align="center"><img src="./image/links_zdepth.svg" width="80%" alt=""></div>
+<pre id="links_zdepth" style="display: none;">
+###红色links
+<link>
+z=20
+file=../data/links2.txt
+radius=0.95r
+color=red
+bezier_radius=0.1r
+thickness=2
+###上限显示1000条links
+record_limit = 1000
+</link>
+####绿色links
+<link>
+z=50
+file=../data/links3.txt
+radius=0.95r
+color=green
+bezier_radius=0.1r
+thickness=2
+record_limit = 1000
+</link>
+</pre>
+<script>sourceCodeById("links_zdepth")</script>
+<!-- ###################
+ -->
+<p class="text-primary" style="font-size: 25px">
+	放大图片也可以看到绿色是画在红色上面的！这也就是z参数的作用
+	<br>在每个单独的link标签内部还可以分别设置对应的bezier_radisu和crest以及link等自定义参数
+</p>
+
+ <h2 class="text-warning">关于links有一些很实用的rule</h2>
+<ul style="font-size: 25px">
+<li><code>on(CHR)</code>            returns 1 if data point on chromosome <code>CHR</code>, for links tests both ends
+</li><li><code>from(CHR)</code>          returns 1 if start of link is on chromosome <code>CHR</code>, used for links only
+</li><li><code>to(CHR)</code>            returns 1 if start of link is on chromosome <code>CHR</code>, used for links only
+</li><li><code>between(CHR1,CHR2)</code> returns 1 if link is between <code>CHR1</code> and <code>CHR2</code>, regardless of orientation, used for links only
+</li><li><code>fromto(CHR1,CHR2)</code>  returns 1 if link is from <code>CHR1</code> to <code>CHR2</code>, used for links only
+</li><li><code>tofrom(CHR1,CHR2)</code>  returns 1 if link is from <code>CHR2</code> to <code>CHR1</code>, used for links only
+</li></ul>
+
+<ul style="font-size: 25px">
+<li><code>on(CHR,START,END)</code>  returns 1 if data point is on chromosome CHR and intersects coordinate START-END, for links tests both ends
+</li></ul>
+<ul style="font-size: 25px">
+<li><code>within(CHR,START,END)</code>  returns 1 if data point is on chromosome CHR and falls entirely within START-END, for links tests both ends
+</li>
+<li><code>abs(var(pos1) - var(pos2))< 100Mb</code>这个主要是应用在 <code>condition  = var(intrachr)</code>染色体内部的链接规则；当两个连接点的绝对距离满足规则就执行-----</li>
+</ul>
+<div align="center"><img src="./image/links_rules3.svg"  width="80%" alt=""></div>
+<p class="text-primary" style="font-size: 25px">这个图我用了3个规则</p>
+<pre id="links_rules3" style="display: none;">
+&lt rules&gt
+&lt rule&gt
+condition=eval(var(intrachr))
+condition=abs(var(pos1)-var(pos2))&gt20Mb
+condition=abs(var(pos1)-var(pos2))&lt50Mb
+color=green
+bezier_radius=0.75r
+&lt /rule&gt
+&lt rule&gt
+condition=eval(var(intrachr))
+condition=abs(var(pos1)-var(pos2))&gt50Mb
+show=no
+&lt /rule&gt
+&lt rule&gt
+condition=eval(var(intrachr))
+condition=abs(var(pos1)-var(pos2)) &lt20Mb
+show=no
+&lt /rule&gt
+&lt /rules&gt	
+</pre>
+<script>sourceCodeById("links_rules3")</script>
+
+<h3>关于links一些属性的设置同样可以应用rule规则</h3>
+
+<pre id="links_rule4" style="display: none;">
+&lt rule&gt
+condition  = 1
+thickness  = eval(sprintf("%d",remap_round(max(var(size1),var(size2)),1,25000,2,6)))
+radius     = eval(sprintf("%fr",remap(min(var(size1),var(size2)),1,25000,0.5,0.999)))
+color      = eval(sprintf("spectral-11-div-%d",remap_round(scalar min(var(size1),var(size2)),1,25000,1,11)))
+z          = eval(int(max(var(size1),var(size2))/100))
+&lt /rule&gt
+</pre>
+<script>sourceCodeById("links_rule4")</script>
+
+<h2>最后就是关于ribbon的展示了；当links的区域足够大时就可以使用ribbon进行展示</h2>
+<p style="font-size: 25px">
+	<code>ribbon=yes</code>将显示绸带状的links
+	<br>
+	<code>stroke_color&&stroke_thickness</code>设置边框
+</p>
+<h2>ribbon怎么让它变得扭曲;加上twist参数，强制扭曲</h2>
+<div align="center"><img src="./image/ribbon_twist.png" width="70%" alt=""></div>
+<p class="text-primary" style="font-size: 25px">
+	links内容就学习到这里啦！有些部分感觉很简单就没有直接实践，从<a href="http://circos.ca/documentation/tutorials/links"><strong>官网</strong></a>直接截的图方便理解！
+</p>
+<!-- 
+################# -->
+<footer id="footer">
+
+</footer>
+<script>$("#footer").load("/includes/footer.html.php")</script>
+
+</div>
+
+	
+</body>
+</html>
