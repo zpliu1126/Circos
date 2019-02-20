@@ -149,9 +149,12 @@ suffix=%
 		<li>label=3'描述了label上的字符</li>
 		<li>format=%s 以字符串的形式进行展示</li>
 		<li>同时要注意rposition和rspacing或者position和spacing是不能同时使用在一个tick标签里面的</li>
+		<li>一般开始会标识0label；为了让5'能够打上去，应该使用 <span class="text-danger">force_display=yes</span>参数</li>
 	</ul>
 </p>
 <pre id="single_tick" style="display: none;">
+###当一个tick有两个label时强制都显示
+force_display=yes
 &lt tick&gt
 chromosomes=hs1;hs2;hs3;
 show_label=yes
