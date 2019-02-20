@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="/includes/head.js"></script>
+	<title>2D-Tracks</title>
+</head>
+<body>
+	<div class="container">
+	<h1 class="text-primary text-center">首先就画scatter散点图；累的半死</h1>	
+	<article>
+		<p>
+			<h2>首先就得看看所需要的数据格式是什么样子的</h2>
+			<pre id="scatter_data" style="display: none;">
+#chr start end value descripte
+......
+hs1 102120 2003230 0.005
+hs1 100220 201100 0.01
+hs1 10023420 20032410 0.02
+hs1 4332041 5202200 0.003
+hs1 1500220 4200210 0.001
+hs1 41020430 62001230 0.004
+hs1 66231000 72042100 0.007
+hs1 2231000 3621000 0.008
+hs1 13211000 14332000 0.007
+hs1 4441000 5552000 0.006
+......				
+</pre>
+<script>sourceCodeById("scatter_data")</script>
+<span class="text-warning" style="font-size: 25px">2D的图形都有着共同的属性来控制</span>
+<ul class="text-success" style="font-size: 20px">
+<li><code>show</code> - 控制图形的显示
+</li><li><code>type</code> - 决定图形类型 scatter, line, histogram, heatmap, etc.
+</li><li><code>file</code> - 图形的数据文件
+</li><li><code>min/max</code> - 图片轴的范围###解释不太清楚hahah
+</li><li><code>r0/r1</code> - 图形显示的位置
+</li><li><code>glyph</code> - 展示的形状circle, rectangle, or triangle
+</li><li><code>glyph_size</code> - 形状大小
+</li><li><code>color</code> - 颜色
+</li><li><code>stroke_color</code> - 边框颜色
+</li><li><code>stroke_thickness</code> - 边框厚度
+</li></ul>
+</p>
+
+<h2>通过backgrounds标签内定义条纹填充或图片堆积形的填充</h2>
+<pre id="scatter_background" style="display: none;">
+&lt backgrounds&gt
+&lt background&gt
+color     = vlgrey
+# absolute fill range
+####绝对距离#######
+y1        = 0.5
+y0        = 0
+&lt /background&gt
+&lt background&gt
+color     = vlred
+# relative fill range
+######相对距离####
+y1        = 1r
+y0        = 0.75r
+&lt /background&gt
+&lt /backgrounds&gt
+</pre>
+<script>sourceCodeById("scatter_background")</script>
+<p class="text-primary" style="font-size: 25px">
+	讲真，y0、y1的绝对距离控制背景的填充的径向范围；我是真搞不懂
+</p>
+
+<h2>添加网格线来让背景更好看</h2>
+<pre id="scatter_axes" style="display: none;">
+&lt axes&gt
+&lt axis&gt
+color     = red_a5
+thickness = 1
+spacing   = 0.025r
+&lt /axis&gt
+&lt axis&gt
+color     = red_a3
+thickness = 2
+spacing   = 0.1r
+&lt /axis&gt
+&lt /axes&gt
+</pre>
+<script>sourceCodeById("scatter_axes")</script>
+<p class="text-primary" style="font-size: 25px">
+	我还是老老实实用我的相对距离y0=0.025r ！
+</p>
+<h2>使用rule规则来控制不同的形状显示</h2>
+<pre id="scatter_rule" style="display: none;">
+&lt rule&gt
+condition    = var(value) &gt 0.5
+stroke_color = dgreen
+color        = green
+glyph        = rectangle
+glyph_size   = 6
+&lt /rule&gt	
+</pre>
+<script>sourceCodeById("scatter_rule")</script>
+<p class="text-primary" style="font-size: 30px">最后大功告成！呕心沥血的图片呐！</p>
+<div align="center"><img src="./image/scatter.svg" alt="" width="80%"></div>
+		
+	</article>
+
+
+
+
+
+
+<!-- ################# -->
+<footer id="footer" >
+	
+</footer>
+<script>
+	$("footer").load("/includes/footer.html.php")
+</script>
+	</div>
+	
+</body>
+</html>
