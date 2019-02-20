@@ -139,10 +139,59 @@ suffix=%
 &lt /tick&gt	
 </pre>
 <script>sourceCodeById("relative_ticks")</script>
+
+<h1>关于如何在ideogram上打上单个tick</h1>
+<div align="center"><img src="./image/single_tick.svg" width="80%" alt=""></div>
+<p style="font-size: 25px">
+	在每条染色体的开始和结束位置上标明名称
+	<ul class="text-success" style="font-size: 20px">
+		<li>使用<span class="text-danger">position</span>参数而不是 <span class="text-danger">spacing</span>参数啦；也可以使用 <span class="text-danger">rposition</span>定义的相对位置</li>
+		<li>label=3'描述了label上的字符</li>
+		<li>format=%s 以字符串的形式进行展示</li>
+		<li>同时要注意rposition和rspacing或者position和spacing是不能同时使用在一个tick标签里面的</li>
+	</ul>
+</p>
+<pre id="single_tick" style="display: none;">
+&lt tick&gt
+chromosomes=hs1;hs2;hs3;
+show_label=yes
+label_size=40p
+label_font=condensedbold
+size=10p
+thickness=2p
+position=end
+label=3'
+color=purple
+format=%s
+&lt /tick&gt	
+</pre >
+<script>sourceCodeById("single_tick")</script>
+<p>
+	这里的thickness和size属性我是重写了ticks父标签的定义的；
+</p>
+<h3>还有一个叫rings的东西；其实也就是在tick标签里的radius属性可以定义很多次；每次的定义都会画出来；不会被后面的定义覆盖！</h3>
 </article>
+<h2>总结:</h1>
 
+<ul class="text-success" style="font-size: 20px">
 
+	<li>ticks的画法，也主要是先声明 <span class="text-danger">show_ticks=yes</span>和 <span class="text-danger">show_tick_labels=yes</span></li>
+	<li>紧接着就是关于tick的一些必不可少设定，radius、size、thickness等</li>
+	<li>在tick子标签中对属性进行继承和重写；可以控制label的有无和一些label属性</li>
+	<li>关于间隔的设定有绝对间隔和相对间隔之分；同时也可以认为的控制单个tick的位置position和rposition</li>
+	<li>最后就是关于radius的定义可以是多个</li>
+</ul>
+<p class="text-danger" style="font-size: 25px">
+		Ticks部分的内容就结束啦！以上内容全部来之circos官网，加上本人的实践；如有不对的地方请指正！
+</p>
 
+<!-- ##################
+ --><footer id="footer">
+	
+</footer>
+<script>
+	$("#footer").load("/includes/footer.html.php")
+</script>
 	</div>
 	
 </body>
