@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="container">
-	<h1 class="text-primary text-center">首先就画scatter散点图；累的半死</h1>	
+	<h1 class="text-primary text-center">首先就画scatter散点图；呕心沥血！</h1>	
 	<article>
 		<p>
 			<h2>首先就得看看所需要的数据格式是什么样子的</h2>
@@ -25,6 +25,7 @@ hs1 13211000 14332000 0.007
 hs1 4441000 5552000 0.006
 ......				
 </pre>
+
 <script>sourceCodeById("scatter_data")</script>
 <span class="text-warning" style="font-size: 25px">2D的图形都有着共同的属性来控制</span>
 <ul class="text-success" style="font-size: 20px">
@@ -43,22 +44,22 @@ hs1 4441000 5552000 0.006
 
 <h2>通过backgrounds标签内定义条纹填充或图片堆积形的填充</h2>
 <pre id="scatter_background" style="display: none;">
-&lt backgrounds&gt
-&lt background&gt
+&ltbckgrounds&gt
+&ltbackground&gt
 color     = vlgrey
 # absolute fill range
 ####绝对距离#######
 y1        = 0.5
 y0        = 0
-&lt /background&gt
-&lt background&gt
+&lt/background&gt
+&ltbackground&gt
 color     = vlred
 # relative fill range
 ######相对距离####
 y1        = 1r
 y0        = 0.75r
-&lt /background&gt
-&lt /backgrounds&gt
+&lt/background&gt
+&lt/backgrounds&gt
 </pre>
 <script>sourceCodeById("scatter_background")</script>
 <p class="text-primary" style="font-size: 25px">
@@ -67,18 +68,18 @@ y0        = 0.75r
 
 <h2>添加网格线来让背景更好看</h2>
 <pre id="scatter_axes" style="display: none;">
-&lt axes&gt
-&lt axis&gt
+&ltaxes&gt
+&ltaxis&gt
 color     = red_a5
 thickness = 1
 spacing   = 0.025r
-&lt /axis&gt
-&lt axis&gt
+&lt/axis&gt
+&ltaxis&gt
 color     = red_a3
 thickness = 2
 spacing   = 0.1r
-&lt /axis&gt
-&lt /axes&gt
+&lt/axis&gt
+&lt/axes&gt
 </pre>
 <script>sourceCodeById("scatter_axes")</script>
 <p class="text-primary" style="font-size: 25px">
@@ -86,23 +87,229 @@ spacing   = 0.1r
 </p>
 <h2>使用rule规则来控制不同的形状显示</h2>
 <pre id="scatter_rule" style="display: none;">
-&lt rule&gt
+&ltrule&gt
 condition    = var(value) &gt 0.5
 stroke_color = dgreen
 color        = green
 glyph        = rectangle
 glyph_size   = 6
-&lt /rule&gt	
+&lt/rule&gt	
 </pre>
 <script>sourceCodeById("scatter_rule")</script>
 <p class="text-primary" style="font-size: 30px">最后大功告成！呕心沥血的图片呐！</p>
 <div align="center"><img src="./image/scatter.svg" alt="" width="80%"></div>
-		
-	</article>
+</article>
+
+<article>
+	<h2>紧接着就是线性的2维图的绘制了</h2>
+	<p class="text-primary" style="font-size: 25px">
+		套路就和散点图一样
+		<ul class="text-success" style="font-size: 20px">
+			<li><code>type=line</code>声明图的类型</li>
+			<li><code>color和thickness</code>代替了 <code>stroke_color和stroke_thickness</code>用来设置线条的颜色和宽度</li>
+			<li><code>max_gap</code>参数，当两个相邻点之间的距离超过上限就不会将他们连接起来</li>
+			<li><code>min和max</code>规定了极值点；也就是大于极值点的值就不显示了；也可以使用rule规则加上<code>show=no</code>改变范围内点的显示</li>
+		</ul>
+	</p>
+<h1 class="text-warning text-center">-----图片有点大可能要加载好久----</h1>
+<div align="center"><img src="./image/line_plot.svg" alt="" width="80%"></div>
+	
+<pre id="line_plot" style="display: none;">
+&ltplots&gt
+type=line
+thickness=2
+
+&ltplot&gt
+####超过这个距离的点不会用线连接起来
+max_gap=1u
+file=data/snp.density.250kb.txt
+color=vgrey
+min=0
+max=0.015
+r0=0.5r
+r1=0.8r
+####对整个连接区域进行填充
+#fill_color=vdgrey_a3
+&lt/plot&gt
+&lt/plots&gt
+</pre>
+<script>sourceCodeById("line_plot")</script>
+</article>
+
+<article>
+	<h1>关于条形图histogram的绘制</h1>
+	<p class="text-primary" style="font-size: 25px">
+		条形图中的来说也就多了几个参数:
+		<ul class="text-success" style="font-size: 20px">
+			<li><code>exend_bin=yes/no</code>主要是用来是否连接相邻的两个条形图----连接的顺序和染色体上的点有关 <br></li>
+			<li>关于填充颜色<code>fill_under</code>设置是否对包含区域填充</li>
+			<li>关于对数据进行筛选的部分我就不做叙述了，直接看 <a href="http://circos.ca/documentation/tutorials/2d_tracks/histograms/">官网吧</a>
+			</li>
+		</ul>
+		<pre id="exend_bin" style="display: none;">
+hs1 1000 2000 0.5
+hs1 5000 5500 0.25
+hs1 9000 9250 0.75
+		</pre>
+		<script> sourceCodeById("exend_bin")</script>
+		<font class="text-primary" style="font-size: 25px"><strong class="text-warning">官网原话:</strong>
+			<br>you set extend_bin=yes, the middle bin 5000-5500 will have its left side extended to avg(2000,5000)=3500 and its right side to avg(5500,9000)=7250. <br>Thus, even though the data spans are not contiguous, the histogram trace will be contiguous across the three bins.</font>
+		<div class="text-primary" style="font-size: 20px;">这里的灰色是exend_bin=no 看出来是不连续的
+		而橙色exend_bin=yes则是连续的</div>
+	</p>
+	<div align="center"><img src="./image/2d_track_histogram.svg" alt="" width="70%"></div>
+	
+</article>
 
 
+<article>
+	<h1>关于Tiles瓦片图学习</h1>
+	<p class="text-primary" style="font-size: 25px">
+		主要从以下几个重要的参数讲一下:
+		<ul class="text-success" style="font-size: 20px">
+			<li><code>layers</code>定义显示的tracks的上限</li>
+			<li><code>margin</code>定义左右边距； <code>padding</code>定义上下边距</li>
+			<li><code>layers_overflow</code>有三种模式；我在下面的图形将展示分别是 <code>hide</code>、 <code>collapse</code>、 <code>grow</code></li>
+			<li>在grow模式是使用 <code>layers_overflow_color</code>显示超过部分的颜色</li>
+		</ul>
+		<div class="text-primary" style="font-size: 25px">最外面的模式是hide；然后是collapse、grow</div>
+	</p>
+	<div align="center"><img src="./image/2d_track_Tiles.svg" alt="" width="80%"></div>
+<div class="text-primary" style="font-size: 25px">
+	<h2>与此同时还学到了透明度堆积来；定义间隔的背景颜色的一种新模式</h2>
+	<pre id="background.tile" style="display: none;">
+&ltbackgrounds&gt
+color=vvlgrey_a5
+&ltbackground&gt
+y1=0.25r
+&lt/background&gt
+&ltbackground&gt
+y1=0.5r
+&lt/background&gt
+&ltbackground&gt
+y1=0.75r
+&lt/background&gt
+&ltbackground&gt
+y1=1r
+&lt/background&gt
+&lt/backgrounds&gt
+	</pre>
+	<script>sourceCodeById("background.tile")</script>
 
+</div>
+</article>
 
+<article>
+	<h1>关于heatmap图</h1>
+	<p class="text-primary" style="font-size: 25px">
+		heatmap主要就是关于颜色的映射问题；映射的时候有一个公式
+<pre>
+min + (x_i-min)/(max-min) ^ 1/scale_log_base ... min + (x_j-min)/(max-min) ^ 1/scale_log_base
+</pre>
+<ul class="text-success" style="font-size: 20px">
+
+	<li><code>min/max</code>当min和max没有定义时，从给出的数据中进行统计；而当value与定义的min和max超出范围时(x_i-min)；那么x_i-min/max就等于min/max</li>
+	<li><code>scale_log_base</code>定义颜色的映射是否线性;大于1则颜色深一些的数据会更多一些</li>
+	<li><code>pattern</code>填充模式；包括vline垂直线(vertical line)和hline(horizontal line)垂直线；checker网格线；solid正常的线</li>
+	<li><code>color = spectral-11-div</code>关于调色板的定义我还没搞太清楚</li>
+</ul>
+<div align="center"><img src="./image/scale_log_base.jpg" alt="" width="80%"></div>
+<pre id="2D_heatmap" style="display: none;">
+&ltplots&gt
+type=heatmap
+stroke_thickness=0
+
+###调色板含有9种颜色
+color=spectral-9-div
+####感觉这是备用颜色
+color_alt=black,spectral-8-div,grey
+&ltplot&gt
+####这里的r0、r1是根据所画plot标签的数目来自动计算得到位置
+&lt&ltinclude R0R1.conf&gt&gt
+
+###获得plots标签内定义的color_alt变量###
+color            = conf(plots,color_alt)
+file             = data/heatmap.step.txt
+#######&ltmin的hline &gtmax的vline 中间的checker
+pattern          = hline,checker,vline
+color_mapping    = 2
+min              = 2
+max              = 8
+
+&lt/plot&gt
+&lt/plots&gt	
+</pre>
+<script>sourceCodeById("2D_heatmap")</script>
+</p>
+<div align="center"><img src="./image/2d_track_Heatmap.svg" alt="" width="70%"></div>
+	
+</article>
+
+<article>
+	<h1>关于注释文本text的绘制</h1>
+
+	<p class="text-primary" style="font-size: 25px">
+		在type类型上选择为text；主要围绕的就是关于显示的位置，连接label的links的设置
+		以及label堆积的问题label_snuggle
+		<br>感觉这样到用到的时候才会去研究-------------
+		<ul class="text-success" style="font-size: 20px">
+			<li><code>type=text</code>类型</li>
+			<li><code>links_dims=1p,1p,2p,1p,0p</code>这里设置的尺寸也没太搞明白</li>
+			<li><code>label_rotatae=no</code>文字旋转</li>
+			<li><code>label_snuggle=yes</code>是否在同一层堆积</li>
+			<li><code>max_snuggle_distance=2r</code>堆积的宽度</li>
+			<li><code>snuggle_tolerance = 0.25r</code>每层递增宽度</li>
+			<li><code>snuggle_sampling = 2</code>同一层，label之间宽度</li>
+		</ul>
+
+		<div align="center">
+			<img src="./image/connector_dims.png" width="90%" alt="">
+			<img src="./image/text_basic.svg" alt="" width="80%"></div>
+		<div class="text-danger">
+			<h2>值得一提的是，text类型的图片可以改变字体的形状；而不是显示label了</h2>
+			<p class="text-primary" style="font-size: 25px">
+				<code>label_font=glyph</code>这种模式下，在rule规则中修改对应的calue值
+<pre id="text_glyph" style="display: none;"> small
+ | medium
+ | | large
+ | | |
+ a b c   square
+ d e f   rhombus
+ g h i   triangle up
+ j k l   triangle down
+ m n o   circle
+
+upper case - solid
+lower case - hollow
+</pre>
+<script>sourceCodeById("text_glyph")</script>
+</p>	
+			
+</div>
+</p>	
+</article>
+<hr>
+<h1>又到了总结的部分啦~~~~<span class="glyphicon glyphicon-hand-right"></span><a  style="color: red;" href="http://circos.ca/documentation/tutorials/2d_tracks">在官网这学习</a><span class="glyphicon glyphicon-hand-left"></span></h1>
+
+<p class="text-primary" style="font-size: 25px">
+	2D-Tracks（二维的轨迹图）主要从以下几个图说起：
+	<ul class="text-success" style="font-size: 20px">
+		<li><code>highlight</code>高亮显示</li>
+		<li><code>scatter</code>散点图</li>
+		<li><code>line</code>线性图</li>
+		<li><code>Tile</code>瓦片图</li>
+		<li><code>Histogram</code>直方图</li>
+		<li><code>heatmap</code>热图</li>
+		<li><code>Text</code>注释文本</li>
+		<li><code>glyph</code>图片的形状</li>
+	</ul>
+
+	<div class="text-warning text-center" style="font-size: 40px" align="center">
+		最后就是一个大杂烩的图，基本上包括所有的2D-tracks
+		<img src="./image/stacking_tracks.svg" alt="" width="80%">
+	</div>
+
+</p>
 
 
 <!-- ################# -->
