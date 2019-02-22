@@ -23,25 +23,25 @@ hs1 1437417 1459927
 	<h2>起到作用的代码部分如下</h2>
 	<pre id="highlight_code" style="display: none;">
 ##定义高亮###	
-&lt highlights&gt
+&lthighlights&gt
 ###优先画，也就是画在底层
 z=0
 fill_color*=green
-&lt highlight&gt
+&lthighlight&gt
 ###强调的数据文件
 file=data/highlight.txt
 r0=0.6r
 r1=1.0r-100p
-&lt /highlight&gt
-&lt highlight&gt
+&lt/highlight&gt
+&lthighlight&gt
 file=data/highlight.txt
 #####被强调区域的位置，和长度设置##
 r0=0.7r
 r1=0.7r+100p
 z=5
 fill_color*=red
-&lt /highlight&gt
-&lt highlight&gt
+&lt/highlight&gt
+&lthighlight&gt
 file=data/highlight.txt
 r0=1.1r
 r1=1.15r
@@ -49,8 +49,8 @@ r1=1.15r
 fill_color*=blue
 stroke_color=dblue
 stroke_thickness=2
-&lt /highlight&gt
-&lt /highlights&gt
+&lt/highlight&gt
+&lt/highlights&gt
 </pre>
 <script>sourceCodeById("highlight_code")</script>
 <p>
@@ -72,23 +72,23 @@ hs1 10044837 11066617 fill_color=blue,z=95,r0=0.4r-100.0388p,r1=0.4r+100.0388p
 
 </p>
 <pre id="recipe_highlight" style="display: none">
-&lt highlights&gt
+&lthighlights&gt
 ##设置所有的highlight的高度
 z=5
 ###将高亮显示在ideogram上
 ideogram=yes
 fill_color=blue
-&lt highlight&gt
+&lthighlight&gt
 ###重新定义#
 file=data/other_genes.txt
 z=10
-&lt /highlight&gt
-&lt highlight&gt
+&lt/highlight&gt
+&lthighlight&gt
 file=data/omim_genes.txt
 z=10
 fill_color=orange
-&lt /highlight&gt
-&lt /highlights&gt
+&lt/highlight&gt
+&lt/highlights&gt
 </pre>
 <script>sourceCodeById("recipe_highlight")</script>
 <p>
@@ -112,7 +112,7 @@ grid_start=0.5r
 grid_end=dims(ideogram,radius_inner)
 
 ##########对应刻度显示grid##########
-&lt tick&gt
+&lttick&gt
 spacing=10u
 size=15p
 thickness=3p
@@ -123,31 +123,31 @@ format=%d
 grid=yes
 grid_color=vgrey
 grid_thickness=2p
-&lt /tick&gt
+&lt/tick&gt
 </pre>
 <script>sourceCodeById("grid")</script>
 
 <h1>第二种起强调作用的模式</h1>
 <img src="./image/recipe2.svg" width="70%" alt="">
 <pre id="recipe2_highlight" style="display: none;">
-&lt highlight&gt
+&lthighlight&gt
 file=data/highlights.txt
 r0 = 0.5r
 r1 = 1r
 fill_color = lgrey
-&lt /highlight&gt
-&lt highlight&gt
+&lt/highlight&gt
+&lthighlight&gt
 file=data/highlights.txt
 r0 = 1r
 r1 = 1.1r
 fill_color = lyellow
-&lt /highlight&gt
-&lt highlight&gt
+&lt/highlight&gt
+&lthighlight&gt
 file=data/highlights.txt
 r0 = 1.1r
 r1 = 1.15r
 fill_color = lgrey
-&lt /highlight&gt	
+&lt/highlight&gt	
 </pre>
 <script>sourceCodeById("recipe2_highlight")</script>
 <p>从源代码上也可以看出来，就是对一个区域，在不同的位置填充不同的颜色，起到的强调效果还不错</p>
@@ -156,24 +156,24 @@ fill_color = lgrey
 <img src="./image/recipe3.svg"  width="70%" alt="">
 <pre id="recipe3_highlight" style="display: none;">
 ##最外面的一条highlight
-&lt highlights&gt
-&lt highlight&gt
+&lthighlights&gt
+&lthighlight&gt
 file = data/highlights.txt
 r0 = 0.9r
 r1 = 0.95r
-&lt /highlight&gt
-&lt /highlights&gt
+&lt/highlight&gt
+&lt/highlights&gt
 
 ###里面的highlight
-&lt plots&gt
-&lt plot&gt
+&ltplots&gt
+&ltplot&gt
 type=highlight
 file=data/highlights.txt
 r0=0.8r
 r1=0.85r
 z=10
-&lt /plot&gt
-&lt /plots&gt
+&lt/plot&gt
+&lt/plots&gt
 </pre>
 <script>sourceCodeById("recipe3_highlight")</script>
 <p>

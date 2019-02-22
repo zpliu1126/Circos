@@ -44,16 +44,16 @@ segdup00012 hs4 150 350
 	<li><span class="text-danger">data_out_of_range* = trim</span>这是在links标签外设置的参数；从字面上可以理解为超出ideogram范围的数据过滤掉</li>
 </ul>
 <pre id="links_basic" style="display: none;">
-&lt links&gt
-&lt link&gt
+&ltlinks&gt
+&ltlink&gt
 file=data/links.txt
 radius=0.95r
 color=black_a4
 bezier_radius=0.1r
 thickness=2
 record_limit  = 2000
-&lt /link&gt
-&lt /links&gt
+&lt/link&gt
+&lt/links&gt
 data_out_of_range*=trim
 </pre>
 <script>sourceCodeById("links_basic")</script>
@@ -126,38 +126,38 @@ record_limit = 1000
 <div align="center"><img src="./image/links_rules3.svg"  width="80%" alt=""></div>
 <p class="text-primary" style="font-size: 25px">这个图我用了3个规则</p>
 <pre id="links_rules3" style="display: none;">
-&lt rules&gt
-&lt rule&gt
+&ltrules&gt
+&ltrule&gt
 condition=eval(var(intrachr))
 condition=abs(var(pos1)-var(pos2))&gt20Mb
-condition=abs(var(pos1)-var(pos2))&lt50Mb
+condition=abs(var(pos1)-var(pos2))&lt10Mb
 color=green
 bezier_radius=0.75r
-&lt /rule&gt
-&lt rule&gt
+&lt/rule&gt
+&ltrule&gt
 condition=eval(var(intrachr))
 condition=abs(var(pos1)-var(pos2))&gt50Mb
 show=no
-&lt /rule&gt
-&lt rule&gt
+&lt/rule&gt
+&ltrule&gt
 condition=eval(var(intrachr))
 condition=abs(var(pos1)-var(pos2)) &lt20Mb
 show=no
-&lt /rule&gt
-&lt /rules&gt	
+&lt/rule&gt
+&lt/rules&gt	
 </pre>
 <script>sourceCodeById("links_rules3")</script>
 
 <h3>关于links一些属性的设置同样可以应用rule规则</h3>
 
 <pre id="links_rule4" style="display: none;">
-&lt rule&gt
+&ltrule&gt
 condition  = 1
 thickness  = eval(sprintf("%d",remap_round(max(var(size1),var(size2)),1,25000,2,6)))
 radius     = eval(sprintf("%fr",remap(min(var(size1),var(size2)),1,25000,0.5,0.999)))
 color      = eval(sprintf("spectral-11-div-%d",remap_round(scalar min(var(size1),var(size2)),1,25000,1,11)))
 z          = eval(int(max(var(size1),var(size2))/100))
-&lt /rule&gt
+&lt/rule&gt
 </pre>
 <script>sourceCodeById("links_rule4")</script>
 

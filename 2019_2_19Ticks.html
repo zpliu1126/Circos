@@ -15,7 +15,7 @@
 <pre id="ticks_basic" style="display: none;">
 show_ticks=yes
 show_tick_labels=yes
-&lt ticks&gt
+&ltticks&gt
 chromosomes_display_default=no
 radius=dims(ideogram,radius_outer)
 label_font=default
@@ -23,7 +23,7 @@ label_offset=5p
 orientation=out
 multiplier=1e-6
 color=black
-&lt /ticks&gt		
+&lt/ticks&gt		
 </pre>
 <script>sourceCodeById("ticks_basic")</script>
 <ul  class="text-justify" style="font-size: 25px;">
@@ -34,7 +34,7 @@ color=black
 </p>
 <h3>接下来让我们看看子标签tick中的内容是怎么样的</h3>	
 <pre id="content_tick" style="display: none;">
-&lt tick&gt
+&lttick&gt
 chromosomes=hs1:50-100;hs2;hs3:20-80;
 orientation=in
 spacing=1u
@@ -42,9 +42,9 @@ size=8p
 thickness=2p
 color=green
 show_label=no
-&lt /tick&gt
+&lt/tick&gt
 
-&lt tick&gt
+&lttick&gt
 chromosomes=hs1:50-100;hs2;hs3:20-80;
 spacing=5u
 size=10p
@@ -54,7 +54,7 @@ show_label=yes
 label_size=20p
 label_offset=10p
 format=%d
-&lt /tick&gt
+&lt/tick&gt
 
 </pre>
 <script>sourceCodeById("content_tick")</script>	
@@ -91,20 +91,20 @@ format=%d
 <pre id="ticks_grid" style="display: none;">
 #控制整体显示
 show_grid=yes
-&lt ticks&gt
+&ltticks&gt
 ####grid在ticks父标签的部分###
 grid_start=0.5r
 grid_end=0.95r
 grid_color=black
 grid_thickness=2p
-&lt tick&gt
+&lttick&gt
 	###对属性进行继承和重定义
 grid_color=red
 grid_start=0.1r
 grid_end=0.6r
 grid=yes
-&lt /tick&gt
-&lt /ticks&gt	
+&lt/tick&gt
+&lt/ticks&gt	
 </pre>
 <script>sourceCodeById("ticks_grid")</script>
 <h1>接下来是关于tick之间间隔是绝对距离还是相对距离啦</h1>
@@ -121,7 +121,7 @@ grid=yes
 </p>
 <pre id="relative_ticks" style="display: none;">
 ####用来展示relative的tick
-&lt tick&gt
+&lttick&gt
 chromosomes=hs1;hs2;hs3;
 show=yes
 show_label=yes
@@ -136,7 +136,7 @@ color=black
 thickness=2p
 format=%d
 suffix=%
-&lt /tick&gt	
+&lt/tick&gt	
 </pre>
 <script>sourceCodeById("relative_ticks")</script>
 
@@ -155,7 +155,7 @@ suffix=%
 <pre id="single_tick" style="display: none;">
 ###当一个tick有两个label时强制都显示
 force_display=yes
-&lt tick&gt
+&lttick&gt
 chromosomes=hs1;hs2;hs3;
 show_label=yes
 label_size=40p
@@ -166,7 +166,7 @@ position=end
 label=3'
 color=purple
 format=%s
-&lt /tick&gt	
+&lt/tick&gt	
 </pre >
 <script>sourceCodeById("single_tick")</script>
 <p>
